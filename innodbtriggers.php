@@ -127,12 +127,13 @@ function innodbtriggers_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
 /**
  * Functions below this ship commented out. Uncomment as required.
  *
+
 /**
- * Implements hook_logTableSpec().
+ * Implements hook_alterLogTables().
  *
  * @param array $logTableSpec
  */
-function innodbtriggers_civicrm_logTableSpec(&$logTableSpec) {
+function innodbtriggers_civicrm_alterLogTables(&$logTableSpec) {
   $contactReferences = CRM_Dedupe_Merger::cidRefs();
   foreach (array_keys($logTableSpec) as $tableName) {
     $contactIndexes = array();
