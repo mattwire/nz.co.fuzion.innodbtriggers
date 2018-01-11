@@ -143,11 +143,24 @@ function innodbtriggers_civicrm_alterLogTables(&$logTableSpec) {
     foreach ($contactRefsForTable as $fieldName) {
       $contactIndexes['index_' . $fieldName] = $fieldName;
     }
-    $logTableSpec[$tableName]['indexes'] = array_merge(array(
-      'index_id' => 'id',
+    $indexArray = array(
       'index_log_conn_id' => 'log_conn_id',
       'index_log_date' => 'log_date',
-    ), $contactIndexes);
+    );
+    // Check if current table has an "id" column. If so, index it too
+    $dsn = DB::parseDSN(CIVICRM_LOGGING_DSN);
+    $dbName = $dsn['database'];
+    $dao = CRM_Core_DAO::executeQuery("
+      SELECT COLUMN_NAME
+      FROM   INFORMATION_SCHEMA.COLUMNS
+      WHERE  TABLE_SCHEMA = '{$dbName}'
+      AND    TABLE_NAME = '{$tableName}'
+      AND    COLUMN_NAME = 'id'
+      ");
+    if ($dao->fetch()){
+      $indexArray['index_id'] = 'id';
+    }
+    $logTableSpec[$tableName]['indexes'] = array_merge($indexArray, $contactIndexes);
   }
 }
 /**
