@@ -125,10 +125,6 @@ function innodbtriggers_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
 }
 
 /**
- * Functions below this ship commented out. Uncomment as required.
- *
-
-/**
  * Implements hook_alterLogTables().
  *
  * @param array $logTableSpec
@@ -163,28 +159,3 @@ function innodbtriggers_civicrm_alterLogTables(&$logTableSpec) {
     $logTableSpec[$tableName]['indexes'] = array_merge($indexArray, $contactIndexes);
   }
 }
-/**
- * Implements hook_civicrm_preProcess().
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_preProcess
- *
-function innodbtriggers_civicrm_preProcess($formName, &$form) {
-
-} // */
-
-/**
- * Implements hook_civicrm_navigationMenu().
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_navigationMenu
- *
-function innodbtriggers_civicrm_navigationMenu(&$menu) {
-  _innodbtriggers_civix_insert_navigation_menu($menu, NULL, array(
-    'label' => ts('The Page', array('domain' => 'nz.co.fuzion.innodbtriggers')),
-    'name' => 'the_page',
-    'url' => 'civicrm/the-page',
-    'permission' => 'access CiviReport,access CiviContribute',
-    'operator' => 'OR',
-    'separator' => 0,
-  ));
-  _innodbtriggers_civix_navigationMenu($menu);
-} // */
