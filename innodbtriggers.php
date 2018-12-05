@@ -150,7 +150,7 @@ function innodbtriggers_civicrm_alterLogTables(&$logTableSpec) {
       SELECT COLUMN_NAME
       FROM   INFORMATION_SCHEMA.COLUMNS
       WHERE  TABLE_SCHEMA = '{$dbName}'
-      AND    TABLE_NAME = '{$tableName}'
+      AND    TABLE_NAME = 'log_{$tableName}'
       AND    COLUMN_NAME = 'id'
       ");
     if ($dao->fetch()){
