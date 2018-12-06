@@ -144,13 +144,13 @@ function innodbtriggers_civicrm_alterLogTables(&$logTableSpec) {
       'index_log_date' => 'log_date',
     );
     // Check if current table has an "id" column. If so, index it too
-    $dsn = DB::parseDSN(CIVICRM_LOGGING_DSN);
+    $dsn = DB::parseDSN(CIVICRM_DSN);
     $dbName = $dsn['database'];
     $dao = CRM_Core_DAO::executeQuery("
       SELECT COLUMN_NAME
       FROM   INFORMATION_SCHEMA.COLUMNS
       WHERE  TABLE_SCHEMA = '{$dbName}'
-      AND    TABLE_NAME = 'log_{$tableName}'
+      AND    TABLE_NAME = '{$tableName}'
       AND    COLUMN_NAME = 'id'
       ");
     if ($dao->fetch()){
