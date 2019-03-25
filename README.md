@@ -2,7 +2,12 @@
 
 Makes CiviCRM use the INNODB, rather than Archive table format for detailed logging.
 
-The INNODB format is arguablly a better format for CiviCRM logging. Although INNODB tables take more space, they can be queried much more effectively, which is useful when you want to consult the logs. Consulting the change log for ARCHIVE tables is phohibitivley slow once your logging has been running a while.
+The INNODB format is arguably a better format for CiviCRM logging. Although INNODB tables take more space, they can be queried much more effectively, which is useful when you want to consult the logs. Consulting the change log for ARCHIVE tables is prohibitively slow once your logging has been running a while.
+
+## Installation
+
+1. Install this extension.
+1. Run System.updatelogtables API to convert existing log tables to InnoDB
 
 ## See also
 
