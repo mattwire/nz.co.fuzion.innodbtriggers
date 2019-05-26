@@ -134,7 +134,9 @@ function innodbtriggers_civicrm_alterLogTables(&$logTableSpec) {
   foreach (array_keys($logTableSpec) as $tableName) {
     $contactIndexes = array();
     $logTableSpec[$tableName]['engine'] = 'INNODB';
-    $logTableSpec[$tableName]['engine_config'] = 'ROW_FORMAT=COMPRESSED KEY_BLOCK_SIZE=4';
+    // @fixme Because the old default was ROW_FORMAT=COMPRESSED KEY_BLOCK_SIZE=4 we have to specify KEY_BLOCK_SIZE=0 to allow conversion
+    //  although it has no meaning for ROW_FORMAT=DYNAMIC
+    $logTableSpec[$tableName]['engine_config'] = 'ROW_FORMAT=DYNAMIC KEY_BLOCK_SIZE=0';
     $contactRefsForTable = CRM_Utils_Array::value($tableName, $contactReferences, array());
     foreach ($contactRefsForTable as $fieldName) {
       $contactIndexes['index_' . $fieldName] = $fieldName;
